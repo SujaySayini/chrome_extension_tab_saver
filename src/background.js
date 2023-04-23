@@ -41,23 +41,72 @@ async function getCurrentTab2() {
 //     // alert('Saved!');
 // }
 
-async function getAllWindows() {
+// async function getAllWindows() {
+//     let windows = await chrome.windows.getAll();
+//     console.log(windows);
+//     for (let i = 0; i < windows.length; i++) {
+//       let id = windows[i].id;
+//       console.log(getAllTabs(id));
+//     }
+    
+//   }
+  
+//   async function getAllTabs(id) {
+//     let queryOptions = { windowId: id};
+//     // `tab` will either be a `tabs.Tab` instance or `undefined`.
+//     let tabs = await chrome.tabs.query(queryOptions);
+//     console.log(tabs);
+//     //document.getElementById("tabs").innerHTML=tabs.length;
+//     // alert('Saved!');
+//     return tabs.length;
+//   }
+
+// async function getAllWindows() {
+//     let windows = await chrome.windows.getAll();
+//     console.log(windows);
+//     let count = 0;
+//     for (let i = 0; i < windows.length; i++) {
+//       let id = windows[i].id;
+//       count = count + await getAllTabs(id);
+//     }
+//     console.log('count = ' + count)
+//     //document.getElementById("tabs").innerHTML=count;
+//       // alert('Saved!');
+//   }
+  
+//   async function getAllTabs(id) {
+//     let queryOptions = { windowId: id};
+//     // `tab` will either be a `tabs.Tab` instance or `undefined`.
+//     let tabs = await chrome.tabs.query(queryOptions);
+//     console.log(tabs);
+//     return tabs.length;
+//   }
+let myTabs = [];
+
+  async function getAllWindows() {
     let windows = await chrome.windows.getAll();
     console.log(windows);
+    let count = 0;
     for (let i = 0; i < windows.length; i++) {
+        console.log('hereonce' + i)
       let id = windows[i].id;
-      console.log(getAllTabs(id));
+      let currTabs = await getAllTabs(id);
+      currTabs.forEach(tab => {
+        myTabs.push(tab.url);
+      });
+      count = count + currTabs.length;
     }
-    
+    console.log(myTabs);
+    console.log('count = ' + count)
+    //document.getElementById("tabs").innerHTML=count;
+      // alert('Saved!');
   }
   
   async function getAllTabs(id) {
-    let queryOptions = { windowId: id};
-    // `tab` will either be a `tabs.Tab` instance or `undefined`.
+    let queryOptions = { windowId: id };
     let tabs = await chrome.tabs.query(queryOptions);
     console.log(tabs);
-    //document.getElementById("tabs").innerHTML=tabs.length;
-    // alert('Saved!');
-    return tabs.length;
+    return tabs;
   }
-getAllWindows();
+  getAllWindows();
+  console.log(myTabs);
