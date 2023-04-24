@@ -12,18 +12,17 @@ let myTabs = [];
 
 async function getAllWindows() {
   let windows = await chrome.windows.getAll();
-  let count = 0;
+  //let count = 0;
   for (let i = 0; i < windows.length; i++) {
     let id = windows[i].id;
     let currTabs = await getAllTabs(id);
     currTabs.forEach(tab => {
       myTabs.push(tab.url);
     });
-    count = count + currTabs.length;
+    //count = count + currTabs.length;
   }
-  document.getElementById("tabs").innerHTML=count;
+  //document.getElementById("tabs").innerHTML=count;
   document.getElementById("myTabs").innerHTML=myTabs.length;
-    // alert('Saved!');
 }
 
 async function getAllTabs(id) {
@@ -41,14 +40,18 @@ function save_tabs_to_txt(){
 }
 
 document.getElementById("openButton").addEventListener("click", open_tabs);
-function open_tabs(){
-  console.log('hello')
+async function open_tabs(){
+  await chrome.windows.create({url:myTabs});
+}
+
+async function open_one_tab(index){
+  await chrome.windows.create({url:myTabs[index]});
 }
 
 function get_tabs(){
   let tabs = localStorage.getItem('myTabs');
   total_tabs = tabs.split(',');
-  document.getElementById("myTabs2").innerHTML=total_tabs.length;
+  document.getElementById("inStorage").innerHTML=total_tabs.length;
   return total_tabs.length;
 }
 get_tabs();

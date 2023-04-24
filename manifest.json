@@ -6,9 +6,9 @@
         "service_worker": "src/background.js"
      },
      "permissions": [
-        "tabs", 
-        "background"
+        "tabs"
       ],
+      "icons": { "16": "icon.jpg"},
     "manifest_version": 3,
     "author": "Sujay Sayini",
     "action":{
