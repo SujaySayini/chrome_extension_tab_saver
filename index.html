@@ -11,7 +11,7 @@
     <title>Tab Saver</title>
   </head>
   <body>
-    <div class="container mt-3" style="width: 300px; height: 200px">
+    <div class="container mt-3" style="width: 600px; height: 200px">
       <h2 class="text-center">My Tab Saver</h2>
       <table class="table table-bordered">
         <thead>
@@ -32,17 +32,12 @@
       <button type="button" id="myButton" class="btn btn-primary">
         Save Tabs
       </button>
-      <button type="button" id="openButton" class="btn btn-primary">
-        Open Saved Tabs
+      <button type="button" id="openButton" class="btn btn-secondary">
+        Open All Saved Tabs
       </button>
-      <label for="cars">Open Saved Tab:</label>
+      <!-- <label for="cars">Open Saved Tab:</label> -->
 
-      <select name="cars" id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
+      <select name="cars" id="myList"></select>
     </div>
   </body>
   <script src="./src/script.js"></script>

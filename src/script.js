@@ -16,13 +16,13 @@ async function getAllWindows() {
   for (let i = 0; i < windows.length; i++) {
     let id = windows[i].id;
     let currTabs = await getAllTabs(id);
-    currTabs.forEach(tab => {
+    currTabs.forEach((tab) => {
       myTabs.push(tab.url);
     });
     //count = count + currTabs.length;
   }
   //document.getElementById("tabs").innerHTML=count;
-  document.getElementById("myTabs").innerHTML=myTabs.length;
+  document.getElementById("myTabs").innerHTML = myTabs.length;
 }
 
 async function getAllTabs(id) {
@@ -32,26 +32,59 @@ async function getAllTabs(id) {
 }
 getAllWindows();
 
-document.getElementById("myButton").addEventListener("click", save_tabs_to_txt);
-function save_tabs_to_txt(){
-  if(confirm('Are you sure you want rewrite your Chrome Tabs?')){
-    localStorage.setItem('myTabs', myTabs);
+document
+  .getElementById("myButton")
+  .addEventListener("click", save_tabs_to_storage);
+function save_tabs_to_storage() {
+  if (confirm("Are you sure you want rewrite your Chrome Tabs?")) {
+    localStorage.setItem("myTabs", myTabs);
   }
 }
 
 document.getElementById("openButton").addEventListener("click", open_tabs);
-async function open_tabs(){
-  await chrome.windows.create({url:myTabs});
+async function open_tabs() {
+  await chrome.windows.create({ url: myTabs });
 }
 
-async function open_one_tab(index){
-  await chrome.windows.create({url:myTabs[index]});
+async function open_one_tab(url) {
+  // let tabs = localStorage.getItem("myTabs");
+  // total_tabs = tabs.split(",");
+  await chrome.windows.create({ url: url });
 }
 
-function get_tabs(){
-  let tabs = localStorage.getItem('myTabs');
-  total_tabs = tabs.split(',');
-  document.getElementById("inStorage").innerHTML=total_tabs.length;
-  return total_tabs.length;
+function get_tabs_from_storage() {
+  let tabs = localStorage.getItem("myTabs");
+  total_tabs = tabs.split(",");
+  document.getElementById("inStorage").innerHTML = total_tabs.length;
+
+  const myList = document.getElementById("myList");
+  myList[0] = new Option("Open Saved Tab:", 0, true, true);
+
+  total_tabs.forEach((element, key) => {
+    myList[key + 1] = new Option(element, key);
+  });
 }
-get_tabs();
+get_tabs_from_storage();
+
+//document.getElementById("myList").addEventListener("change", changeFunc());
+
+// function changeFunc() {
+//   alert("hELLO");
+//   var selectBox = document.getElementById("myList");
+//   alert(selectBox.selectedIndex);
+//   var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+//   if (selectedValue != 0) {
+//     alert(selectedValue);
+//   }
+// }
+
+document.getElementById("myList").addEventListener("change", (event) => {
+  //alert(event.target.selectedIndex);
+  var selectBox = document.getElementById("myList");
+  //alert(selectBox.selectedIndex);
+  var url = selectBox.options[selectBox.selectedIndex].text;
+
+  if (confirm("Are you sure you want to '" + url + "'.")) {
+    open_one_tab(url);
+  }
+});
