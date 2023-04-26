@@ -8,7 +8,7 @@
      "permissions": [
         "tabs"
       ],
-      "icons": { "16": "icon.jpg"},
+      "icons": { "16": "images/icon.jpg"},
     "manifest_version": 3,
     "author": "Sujay Sayini",
     "action":{

@@ -2,7 +2,7 @@
 
  Save your Chrome tabs in case of random crashes
 
-![screenshot](images\screenshot.png)
+![screenshot](https://github.com/SujaySayini/chrome_extension_tab_saver/blob/main/images/screenshot.png?raw=true)
 
 ## Tools used
 
