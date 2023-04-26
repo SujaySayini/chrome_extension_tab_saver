@@ -1,0 +1,13 @@
+.block1 {
+    max-width: 100px; 
+    max-height: 100px; 
+    overflow:auto;
+    display: block;
+  }
+  
+  .block2 {
+    display: inline-block; 
+    vertical-align: top; 
+    overflow: hidden; 
+    border-right: 1px solid #a4a4a4;
+  }

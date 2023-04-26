@@ -58,10 +58,16 @@ function get_tabs_from_storage() {
   document.getElementById("inStorage").innerHTML = total_tabs.length;
 
   const myList = document.getElementById("myList");
-  myList[0] = new Option("Open Saved Tab:", 0, true, true);
+  myList[0] = new Option("Open a Saved Tab:", 0, true, true);
 
   total_tabs.forEach((element, key) => {
-    myList[key + 1] = new Option(element, key);
+    let sections = element.split("/");
+    if (sections[2] === "") {
+      section[2] = section[0];
+    }
+    let tab_option = new Option(key + 1 + ". " + sections[2], element);
+    //tab_option.setAttribute("style", "float: right; display: block");
+    myList[key + 1] = tab_option;
   });
 }
 get_tabs_from_storage();
@@ -82,7 +88,7 @@ document.getElementById("myList").addEventListener("change", (event) => {
   //alert(event.target.selectedIndex);
   var selectBox = document.getElementById("myList");
   //alert(selectBox.selectedIndex);
-  var url = selectBox.options[selectBox.selectedIndex].text;
+  var url = selectBox.options[selectBox.selectedIndex].value;
 
   if (confirm("Are you sure you want to '" + url + "'.")) {
     open_one_tab(url);
