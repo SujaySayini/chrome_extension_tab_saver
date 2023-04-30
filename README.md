@@ -1,6 +1,7 @@
 # Tab Saver
-
- Save your Chrome tabs in case of random crashes
+Have you ever had Google Chrome crash on you randomly and you end up losing all your Chrome Tabs?
+Now, Save your Chrome Tabs whenever you want just in case of random crashes
+Right now, working on putting this up on the Chrome Store...
 
 ![screenshot](https://github.com/SujaySayini/chrome_extension_tab_saver/blob/main/images/screenshot.png?raw=true)
 
